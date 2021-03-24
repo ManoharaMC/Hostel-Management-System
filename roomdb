@@ -1,0 +1,19 @@
+include(config.php)
+require_once 'dbconfig.php'
+if(isset($_POST['submit']))
+{
+$room_id=$_POST['room_id'];
+$block=$_POST['block'];
+$floor=$_POST['floor'];
+$room_type=$_POST['room_type'];
+$capacity=$_POST['capacity'];
+$occupaid=$_POST['occupaid'];
+$available=$_POST['available'];
+$query="insert into  tbl_room(room_id,block,floor,room_type,capacity,occupaid,available) values('$room_id','$block','$floor','$room_type','$capacity','$occupaid','$available')";
+
+$stmt = $mysqli->prepare($query);
+//$rc=$stmt->bind_param('sssssss',$room_id,$block,$floor,$room_type,$capacity,$occupaid,available);
+$stmt->execute();
+echo"<script>alert('data saved Succssfully ');</script>";
+}
+?>

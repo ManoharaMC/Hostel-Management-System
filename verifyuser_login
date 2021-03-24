@@ -1,0 +1,42 @@
+<?php
+session_destroy();
+session_start();
+
+require_once 'dbconfig.php';
+if(isset($_POST['login']))
+{
+
+$username=$_POST['username'];
+$pass_wd=$_POST['passwords'];
+
+
+
+$query="SELECT username FROM tbl_userlogin  WHERE  username='$username' and password='$pass_wd'";
+$stmt = $db_con->prepare($query);
+
+if($stmt->execute()){
+	
+	if($stmt->rowCount()==1){
+	echo $_SESSION['cuser']=$username;
+	?>
+	<script>alert('Login Succssfully ');
+	
+	// window.location.assign("studentmess.php")
+	
+	</script>";
+	<?php
+	}	
+	else{
+	?>	
+	<script>alert('Invalid Login ');
+	// window.location.assign("userlogin.php")
+	
+	</script>;	
+	<?php	
+	}
+}
+
+
+
+}
+?>
